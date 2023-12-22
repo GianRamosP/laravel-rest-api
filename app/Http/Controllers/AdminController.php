@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,6 +14,8 @@ class AdminController extends Controller
     public function index()
     {
         //
+        $admin = Admin::orderBy('id_admin', 'desc')->get();
+        return response()->json($admin);
     }
 
     /**

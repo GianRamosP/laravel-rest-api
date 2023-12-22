@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Manager;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
@@ -12,7 +13,8 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        //
+        $manager = Manager::orderBy('id_manager', 'desc')->get();
+        return response()->json($manager);
     }
 
     /**
@@ -28,7 +30,17 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $manager = new Manager;
+        // $manager->id_usuario_comun = $request->id_usuario_comun;
+        // $manager->id_admin = $request->id_admin;
+        $manager->nombre_hotel = $request->nombre_hotel;
+        $manager->nombre_persona = $request->nombre_persona;
+        $manager->telefono = $request->telefono;
+        $manager->fecha_renovacion = $request->fecha_renovacion;
+        $manager->email = $request->email;
+        $manager->password = $request->password;
+        $manager->save();
+        return response()->json($manager);
     }
 
     /**
@@ -36,7 +48,8 @@ class ManagerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $manager = Manager::findOrFail($id);
+        return response()->json($manager);
     }
 
     /**
@@ -52,7 +65,17 @@ class ManagerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $manager = Manager::findOrFail($id);
+        // $manager->id_usuario_comun = $request->id_usuario_comun;
+        // $manager->id_admin = $request->id_admin;
+        $manager->nombre_hotel = $request->nombre_hotel;
+        $manager->nombre_persona = $request->nombre_persona;
+        $manager->telefono = $request->telefono;
+        $manager->fecha_renovacion = $request->fecha_renovacion;
+        $manager->email = $request->email;
+        $manager->password = $request->password;
+        $manager->save();
+        return response()->json($request);
     }
 
     /**
@@ -60,6 +83,8 @@ class ManagerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $manager = Manager::findOrFail($id);
+        $manager->delete();
+        return response()->json($manager);
     }
 }

@@ -24,8 +24,8 @@ class ManagerFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_usuario_comun' => UsuarioComun::inRandomOrder()->first()->id_usuario_comun,
-            'id_admin' => Admin::inRandomOrder()->first()->id_admin,
+            // 'id_usuario_comun' => UsuarioComun::inRandomOrder()->first()->id_usuario_comun,
+            // 'id_admin' => Admin::inRandomOrder()->first()->id_admin,
 
             'nombre_hotel' => $this->faker->company(),
             'nombre_persona' => $this->faker->name(),
