@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Habitacion;
 use Illuminate\Http\Request;
 
 class HabitacionController extends Controller
@@ -13,6 +14,8 @@ class HabitacionController extends Controller
     public function index()
     {
         //
+        $habitacion = Habitacion::orderBy('id_habitacion', 'desc')->get();
+        return response()->json($habitacion);
     }
 
     /**
@@ -29,6 +32,16 @@ class HabitacionController extends Controller
     public function store(Request $request)
     {
         //
+        $habitacion = new Habitacion;
+
+        $habitacion->nro_habitacion = $request->nro_habitacion;
+        $habitacion->tipo = $request->tipo;
+        $habitacion->precio = $request->precio;
+        $habitacion->descripcion = $request->descripcion;
+        $habitacion->disponibilidad = $request->disponibilidad;
+
+        $habitacion->save();
+        return response()->json($habitacion);
     }
 
     /**
@@ -37,6 +50,8 @@ class HabitacionController extends Controller
     public function show(string $id)
     {
         //
+        $habitacion = Habitacion::findOrFail($id);
+        return response()->json($habitacion);
     }
 
     /**
@@ -52,7 +67,16 @@ class HabitacionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $habitacion = Habitacion::findOrFall($id);
+
+        $habitacion->nro_habitacion = $request->nro_habitacion;
+        $habitacion->tipo = $request->tipo;
+        $habitacion->precio = $request->precio;
+        $habitacion->descripcion = $request->descripcion;
+        $habitacion->disponibilidad = $request->disponibilidad;
+
+        $habitacion->save();
+        return response()->json($request);
     }
 
     /**
@@ -61,5 +85,8 @@ class HabitacionController extends Controller
     public function destroy(string $id)
     {
         //
+        $habitacion = Habitacion::findOrFall($id);
+        $habitacion->delete();
+        return response()->json($habitacion);
     }
 }
